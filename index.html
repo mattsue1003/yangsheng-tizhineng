@@ -439,6 +439,23 @@ html.m .bar .nb{height:46px;min-width:46px}
   html.m .cover .art{width:38%;height:100%;border-radius:0 28px 28px 0}
   html.m .cover .txt{overflow-y:auto}
 }
+/* ── Link with QR code and visible address ── */
+.lq{display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--ink);background:#fff;border-radius:18px;padding:10px 16px 10px 10px;min-width:0}
+.lq img{width:104px;height:104px;flex:none;display:block}
+.lq span{font-size:19px;line-height:1.45;min-width:0}
+.lq b{font-size:21px}
+.u,.url{font-style:normal;font-family:var(--fl);color:var(--red);word-break:break-all;font-size:17px;text-decoration:underline;text-underline-offset:3px}
+.rc .url{margin-top:8px;font-size:18px}
+.buytxt .url,.fantxt .url{font-size:17px}
+.qrpanel.list{width:560px;align-items:stretch;justify-content:center;gap:14px;padding:22px}
+.qrpanel.list .lq img{width:118px;height:118px}
+html.m .qrpanel.list{width:auto;padding:14px;gap:10px}
+html.m .lq{gap:12px;padding:8px 10px 8px 8px}
+html.m .lq img,html.m .qrpanel.list .lq img{width:80px;height:80px}
+html.m .lq span{font-size:14px}
+html.m .lq b{font-size:15px}
+html.m .u,html.m .url,html.m .rc .url{font-size:12.5px}
+
 /* ── Print / PDF: every slide is one 16:9 page, answers shown ── */
 .pqr{display:none}
 html.print,html.print body{height:auto;overflow:visible;background:#fff}
@@ -448,7 +465,7 @@ html.print .slide{position:relative;inset:auto;width:1600px;height:900px;opacity
 html.print .reveal{opacity:1;transform:none;transition:none}
 html.print .bar,html.print .ov{display:none!important}
 html.print [data-play],html.print [data-metro],html.print button[data-yt],html.print .beat,html.print .rfbar,html.print [data-go],html.print .ctrl{display:none!important}
-html.print .pqr{display:flex;align-items:center;gap:18px;background:#fff;border-radius:18px;padding:12px;color:var(--ink)}
+html.print .pqr{display:flex;align-items:center;gap:18px;background:#fff;border-radius:18px;padding:12px;color:var(--ink);text-decoration:none}
 html.print .pqr img{width:150px;height:150px;display:block}
 html.print .pqr span{font-size:22px;font-weight:700;line-height:1.4}
 html.print .pqr.site{margin-top:30px;background:var(--panel)}
@@ -476,7 +493,7 @@ html.print .rf{min-height:150px}
       <li>講師｜鍾孟修 職能治療師</li>
     </ul>
     <div style="margin-top:38px"><button class="pill" data-go="next" type="button">開始上課 <span aria-hidden="true">→</span></button></div>
-    <div class="pqr site"><img src="qr/site.svg" alt="網頁版簡報 QR Code"><span>掃描開啟互動網頁版<br>mattsue1003.github.io/yangsheng-tizhineng</span></div>
+    <a class="pqr site" href="https://mattsue1003.github.io/yangsheng-tizhineng/" target="_blank" rel="noopener"><img src="qr/site.svg" alt="網頁版簡報 QR Code"><span>掃描或點選開啟互動網頁版<br><i class="u">mattsue1003.github.io/yangsheng-tizhineng</i></span></a>
   </div>
 </section>
 
@@ -806,18 +823,21 @@ html.print .rf{min-height:150px}
     <div class="col">
       <ul class="checks">
         <li>打開手機 YouTube，搜尋「<b class="b">鍾孟修 手指操</b>」</li>
-        <li>或用手機掃右邊的 QR Code，直接開影片</li>
+        <li>或用手機掃右邊的 QR Code，直接開影片和音樂</li>
         <li>跟著影片做，做錯了笑一笑，再來一次</li>
         <li>感覺卡卡的？那就是大腦正在「一心二用」</li>
+        <li>熟練後放音樂，<b class="b">跟著節拍</b>一起做</li>
       </ul>
       <div class="btnrow">
-        <button class="pill" type="button" data-yt="1zIEGxapySE">▶ 播放 健腦手指操</button>
+        <button class="pill" type="button" data-yt="1zIEGxapySE">▶ 健腦手指操</button>
         <button class="pill ghostbtn" type="button" data-yt="hWdNsCFQ89w">▶ 進階版</button>
+        <button class="pill ghostbtn" type="button" data-yt="CbdgIqxP5QQ">♪ 配樂〈哈囉〉</button>
       </div>
     </div>
-    <div class="panel qrpanel">
-      <div class="qr lg"><img src="qr/finger-video.svg" alt="健腦手指操影片 QR Code"></div>
-      <p class="qrcap">掃描觀看<br>健腦手指操（1:51）</p>
+    <div class="panel qrpanel list">
+      <a class="lq" href="https://www.youtube.com/watch?v=1zIEGxapySE" target="_blank" rel="noopener"><img src="qr/finger-video.svg" alt="健腦手指操（1:51） QR Code"><span><b>健腦手指操（1:51）</b><br><i class="u">youtube.com/watch?v=1zIEGxapySE</i></span></a>
+      <a class="lq" href="https://www.youtube.com/watch?v=hWdNsCFQ89w" target="_blank" rel="noopener"><img src="qr/finger-adv.svg" alt="進階版手指操（1:17） QR Code"><span><b>進階版手指操（1:17）</b><br><i class="u">youtube.com/watch?v=hWdNsCFQ89w</i></span></a>
+      <a class="lq" href="https://www.youtube.com/watch?v=CbdgIqxP5QQ" target="_blank" rel="noopener"><img src="qr/finger-music.svg" alt="配樂：鳳飛飛〈哈囉〉（2:45） QR Code"><span><b>配樂：鳳飛飛〈哈囉〉（2:45）</b><br><i class="u">youtube.com/watch?v=CbdgIqxP5QQ</i></span></a>
     </div>
   </div>
 </section>
@@ -895,7 +915,7 @@ html.print .rf{min-height:150px}
 </section>
 
 <!-- 29 Step -->
-<section class="slide move-s" data-t="踏步體智能 120 BPM" data-bpm="120" data-yt="HdFDMzZtgXo">
+<section class="slide move-s" data-t="踏步體智能 120 BPM" data-bpm="120" data-yt="Yyd5VYJXjw8">
   <div class="ghost">Step × Brain</div>
   <div class="kicker">實作 1／5</div>
   <h2>踏步體智能</h2>
@@ -904,7 +924,7 @@ html.print .rf{min-height:150px}
       <div class="bpm">120<small>BPM</small></div>
       <div class="what">一分鐘 120 拍，一拍踏一步。<br>可以坐著踏，也可以扶椅站著踏。</div>
       <button class="pill" type="button" data-play>▶ 播放 120 BPM 音樂</button>
-      <div class="pqr"><img src="qr/music-120.svg" alt="120 BPM 音樂 QR Code"><span>掃描播放<br>120 BPM 音樂</span></div>
+      <a class="lq" href="https://www.youtube.com/watch?v=Yyd5VYJXjw8" target="_blank" rel="noopener"><img src="qr/music-120.svg" alt="掃描或點選播放 120 BPM 鼓聲 QR Code"><span><b>掃描或點選播放 120 BPM 鼓聲</b><br><i class="u">youtube.com/watch?v=Yyd5VYJXjw8</i></span></a>
       <button class="mbtn" type="button" data-metro aria-pressed="false">♩ 節拍器</button>
       <div class="beat" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     </div>
@@ -917,16 +937,16 @@ html.print .rf{min-height:150px}
 </section>
 
 <!-- 30 Slow jog -->
-<section class="slide move-s" data-t="超慢跑體智能 180 BPM" data-bpm="180" data-yt="SSgLv5lkBtI">
+<section class="slide move-s" data-t="超慢跑體智能 160 BPM" data-bpm="160" data-yt="AmrZugRy8OA">
   <div class="ghost">Slow Jog × Brain</div>
   <div class="kicker">實作 2／5</div>
   <h2>超慢跑體智能</h2>
   <div class="move">
     <div class="player">
-      <div class="bpm">180<small>BPM</small></div>
+      <div class="bpm">160<small>BPM</small></div>
       <div class="what">小步伐、前腳掌輕輕著地，<br>速度慢到可以邊跑邊說話。</div>
-      <button class="pill" type="button" data-play>▶ 播放 180 BPM 音樂</button>
-      <div class="pqr"><img src="qr/music-180.svg" alt="180 BPM 音樂 QR Code"><span>掃描播放<br>180 BPM 音樂</span></div>
+      <button class="pill" type="button" data-play>▶ 播放 160 BPM 音樂</button>
+      <a class="lq" href="https://www.youtube.com/watch?v=AmrZugRy8OA" target="_blank" rel="noopener"><img src="qr/music-160.svg" alt="掃描或點選播放 160 BPM 鼓聲 QR Code"><span><b>掃描或點選播放 160 BPM 鼓聲</b><br><i class="u">youtube.com/watch?v=AmrZugRy8OA</i></span></a>
       <button class="mbtn" type="button" data-metro aria-pressed="false">♩ 節拍器</button>
       <div class="beat" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     </div>
@@ -939,7 +959,7 @@ html.print .rf{min-height:150px}
 </section>
 
 <!-- 31 Strength -->
-<section class="slide move-s" data-t="肌力體智能 100 BPM" data-bpm="100" data-yt="lbz6ZvoCnaw">
+<section class="slide move-s" data-t="肌力體智能 100 BPM" data-bpm="100" data-yt="As1Ky16QYHE">
   <div class="ghost">Strength × Brain</div>
   <div class="kicker">實作 3／5</div>
   <h2>肌力體智能</h2>
@@ -948,7 +968,7 @@ html.print .rf{min-height:150px}
       <div class="bpm">100<small>BPM</small></div>
       <div class="what">坐到站：4 拍站起來、4 拍慢慢坐下。<br>慢慢坐下那一段最練肌力。</div>
       <button class="pill" type="button" data-play>▶ 播放 100 BPM 音樂</button>
-      <div class="pqr"><img src="qr/music-100.svg" alt="100 BPM 音樂 QR Code"><span>掃描播放<br>100 BPM 音樂</span></div>
+      <a class="lq" href="https://www.youtube.com/watch?v=As1Ky16QYHE" target="_blank" rel="noopener"><img src="qr/music-100.svg" alt="掃描或點選播放 100 BPM 鼓聲 QR Code"><span><b>掃描或點選播放 100 BPM 鼓聲</b><br><i class="u">youtube.com/watch?v=As1Ky16QYHE</i></span></a>
       <button class="mbtn" type="button" data-metro aria-pressed="false">♩ 節拍器</button>
       <div class="beat" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     </div>
@@ -1018,12 +1038,12 @@ html.print .rf{min-height:150px}
   <div class="res">
     <a class="rc" href="https://mattsue1003.github.io/finger-database/" target="_blank" rel="noopener">
       <div class="shot"><img src="img/finger-database.jpg" alt="手指操資料庫網頁畫面"></div>
-      <div><h3>手指操資料庫</h3><p>手指操、雙側協調操影片，坐著就能做。</p></div>
+      <div><h3>手指操資料庫</h3><p>手指操、雙側協調操影片，坐著就能做。</p><p class="url">mattsue1003.github.io/finger-database</p></div>
       <div class="qr"><img src="qr/finger.svg" alt="手指操資料庫 QR Code"></div>
     </a>
     <a class="rc" href="https://mattsue1003.github.io/cog-ecercise-database/" target="_blank" rel="noopener">
       <div class="shot"><img src="img/cog-ecercise-database.jpg" alt="體智能資料庫網頁畫面"></div>
-      <div><h3>體智能資料庫</h3><p>32 個體智能活動、教案範例與分級做法。</p></div>
+      <div><h3>體智能資料庫</h3><p>32 個體智能活動、教案範例與分級做法。</p><p class="url">mattsue1003.github.io/cog-ecercise-database</p></div>
       <div class="qr"><img src="qr/cog.svg" alt="體智能資料庫 QR Code"></div>
     </a>
   </div>
@@ -1047,8 +1067,8 @@ html.print .rf{min-height:150px}
         <li>適合長輩自己練，也適合帶家人、帶團體</li>
       </ul>
       <div class="buyrow">
-        <div class="qr"><img src="qr/book.svg" alt="博客來購書 QR Code"></div>
-        <div class="buytxt"><b>掃描購書</b><br>博客來、誠品等各大書店<br>ISBN 978-626-390-550-4</div>
+        <a class="qr" href="https://search.books.com.tw/search/query/key/9786263905504" target="_blank" rel="noopener"><img src="qr/book.svg" alt="博客來購書 QR Code"></a>
+        <div class="buytxt"><b>掃描購書</b><br>博客來、誠品等各大書店<br>ISBN 978-626-390-550-4<br><a class="url" href="https://search.books.com.tw/search/query/key/9786263905504" target="_blank" rel="noopener">search.books.com.tw/search/query/key/9786263905504</a></div>
       </div>
     </div>
   </div>
@@ -1066,8 +1086,8 @@ html.print .rf{min-height:150px}
       <li>每天一點點，做得開心才能做得久</li>
     </ul>
     <div class="fanrow">
-      <div class="qr md"><img src="qr/fan.svg" alt="粉絲專頁 QR Code"></div>
-      <p class="fantxt">加入粉絲專頁<br><b>鍾孟修 職能治療師</b><br>新的活動與教案都會先分享</p>
+      <a class="qr md" href="https://www.facebook.com/profile.php?id=100063748491881" target="_blank" rel="noopener"><img src="qr/fan.svg" alt="粉絲專頁 QR Code"></a>
+      <p class="fantxt">加入粉絲專頁<br><b>鍾孟修 職能治療師</b><br>新的活動與教案都會先分享<br><a class="url" href="https://www.facebook.com/profile.php?id=100063748491881" target="_blank" rel="noopener">facebook.com/profile.php?id=100063748491881</a></p>
     </div>
   </div>
 </section>
