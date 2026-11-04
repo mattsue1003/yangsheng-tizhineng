@@ -439,6 +439,24 @@ html.m .bar .nb{height:46px;min-width:46px}
   html.m .cover .art{width:38%;height:100%;border-radius:0 28px 28px 0}
   html.m .cover .txt{overflow-y:auto}
 }
+/* ── Print / PDF: every slide is one 16:9 page, answers shown ── */
+.pqr{display:none}
+html.print,html.print body{height:auto;overflow:visible;background:#fff}
+html.print .viewport{position:static;inset:auto;background:#fff;overflow:visible}
+html.print .stage{position:static;transform:none!important;width:1600px;height:auto;box-shadow:none;overflow:visible}
+html.print .slide{position:relative;inset:auto;width:1600px;height:900px;opacity:1;visibility:visible;transform:none;transition:none;break-after:page;page-break-after:always;overflow:hidden}
+html.print .reveal{opacity:1;transform:none;transition:none}
+html.print .bar,html.print .ov{display:none!important}
+html.print [data-play],html.print [data-metro],html.print button[data-yt],html.print .beat,html.print .rfbar,html.print [data-go],html.print .ctrl{display:none!important}
+html.print .pqr{display:flex;align-items:center;gap:18px;background:#fff;border-radius:18px;padding:12px;color:var(--ink)}
+html.print .pqr img{width:150px;height:150px;display:block}
+html.print .pqr span{font-size:22px;font-weight:700;line-height:1.4}
+html.print .pqr.site{margin-top:30px;background:var(--panel)}
+html.print .pqr.site img{width:140px;height:140px}
+html.print .pqr.site span{font-size:20px}
+html.print .rf{min-height:150px}
+@page{size:1600px 900px;margin:0}
+@media print{.bar,.ov{display:none!important}}
 </style>
 </head>
 <body>
@@ -458,6 +476,7 @@ html.m .bar .nb{height:46px;min-width:46px}
       <li>講師｜鍾孟修 職能治療師</li>
     </ul>
     <div style="margin-top:38px"><button class="pill" data-go="next" type="button">開始上課 <span aria-hidden="true">→</span></button></div>
+    <div class="pqr site"><img src="qr/site.svg" alt="網頁版簡報 QR Code"><span>掃描開啟互動網頁版<br>mattsue1003.github.io/yangsheng-tizhineng</span></div>
   </div>
 </section>
 
@@ -885,6 +904,7 @@ html.m .bar .nb{height:46px;min-width:46px}
       <div class="bpm">120<small>BPM</small></div>
       <div class="what">一分鐘 120 拍，一拍踏一步。<br>可以坐著踏，也可以扶椅站著踏。</div>
       <button class="pill" type="button" data-play>▶ 播放 120 BPM 音樂</button>
+      <div class="pqr"><img src="qr/music-120.svg" alt="120 BPM 音樂 QR Code"><span>掃描播放<br>120 BPM 音樂</span></div>
       <button class="mbtn" type="button" data-metro aria-pressed="false">♩ 節拍器</button>
       <div class="beat" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     </div>
@@ -906,6 +926,7 @@ html.m .bar .nb{height:46px;min-width:46px}
       <div class="bpm">180<small>BPM</small></div>
       <div class="what">小步伐、前腳掌輕輕著地，<br>速度慢到可以邊跑邊說話。</div>
       <button class="pill" type="button" data-play>▶ 播放 180 BPM 音樂</button>
+      <div class="pqr"><img src="qr/music-180.svg" alt="180 BPM 音樂 QR Code"><span>掃描播放<br>180 BPM 音樂</span></div>
       <button class="mbtn" type="button" data-metro aria-pressed="false">♩ 節拍器</button>
       <div class="beat" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     </div>
@@ -927,6 +948,7 @@ html.m .bar .nb{height:46px;min-width:46px}
       <div class="bpm">100<small>BPM</small></div>
       <div class="what">坐到站：4 拍站起來、4 拍慢慢坐下。<br>慢慢坐下那一段最練肌力。</div>
       <button class="pill" type="button" data-play>▶ 播放 100 BPM 音樂</button>
+      <div class="pqr"><img src="qr/music-100.svg" alt="100 BPM 音樂 QR Code"><span>掃描播放<br>100 BPM 音樂</span></div>
       <button class="mbtn" type="button" data-metro aria-pressed="false">♩ 節拍器</button>
       <div class="beat" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     </div>
@@ -1075,6 +1097,7 @@ html.m .bar .nb{height:46px;min-width:46px}
   /* ── Scale the 1600×900 stage to the window ── */
   const root=document.documentElement;
   function fit(){
+    if(root.classList.contains('print'))return;
     const w=vp.clientWidth, h=vp.clientHeight;
     const phone=w<900||h<520;
     root.classList.toggle('m',phone);
@@ -1271,6 +1294,18 @@ html.m .bar .nb{height:46px;min-width:46px}
   $('#kgSeat').onclick=()=>{seat=!seat;$('#kgSeat').setAttribute('aria-pressed',seat);rules()};
   $('#kgRev').onclick=()=>{rev=!rev;$('#kgRev').setAttribute('aria-pressed',rev);rules()};
 
+  /* ── Print mode (?print): show every slide with answers ── */
+  if(/[?&]print/.test(location.search)){
+    root.classList.add('print'); root.classList.remove('m');
+    window.removeEventListener('resize',fit);
+    slides.forEach(s=>s.classList.add('on'));
+    $$('.quiz').forEach(q=>{const a=+q.dataset.ans;q.querySelectorAll('.opt').forEach((o,k)=>o.classList.toggle('right',k===a));q.querySelectorAll('.reveal').forEach(r=>r.classList.add('show'))});
+    drawLE(); drawAge(); rfShown=true; renderRF();
+    $('#kgWord').innerHTML='<em>左</em>鄰<em>右</em>舍'; $('#kgAct').textContent='往左走一步，再往右走一步'; $('#kgAct').classList.add('show');
+    $$('#ageChart animate').forEach(a=>{const p=a.parentNode; p.setAttribute(a.getAttribute('attributeName'),a.getAttribute('to')); a.remove();});
+    redrawArt(); document.fonts&&document.fonts.ready.then(redrawArt);
+    return;
+  }
   /* ── Start ── */
   const m=location.hash.match(/^#s(\d+)$/);
   slides[0].classList.add('on'); show(m?(+m[1]-1):0);
